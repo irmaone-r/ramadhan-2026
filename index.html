@@ -10,16 +10,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
         @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         .animate-pulse-soft { animation: pulse-soft 3s infinite; }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 pb-24">
 
-    <!-- Top Navigation / Header -->
+    <!-- Navigasi Atas / Header -->
     <header class="bg-emerald-800 text-white p-6 rounded-b-[2.5rem] shadow-2xl sticky top-0 z-50">
         <div class="max-w-md mx-auto">
             <div class="flex justify-between items-start mb-4">
@@ -28,45 +25,41 @@
                         <i data-lucide="moon" class="w-7 h-7 text-yellow-300 fill-current"></i> KHATAM HUB
                     </h1>
                     <p class="text-[10px] opacity-70 font-bold uppercase tracking-[0.2em] mt-1 flex items-center gap-1">
-                        <i data-lucide="map-pin" class="w-3 h-3 text-emerald-400"></i> JKT <span class="text-emerald-400">↔</span> BKL
+                        <i data-lucide="zap" class="w-3 h-3 text-emerald-400"></i> LIVE SYNC ACTIVE
                     </p>
                 </div>
-                <div id="countdown" class="flex gap-2 font-bold">
-                    <!-- Countdown injected here -->
-                </div>
+                <div id="countdown" class="flex gap-2 font-bold"></div>
             </div>
             
-            <!-- Daily Quote -->
             <div class="bg-emerald-900/50 rounded-2xl p-3 border border-emerald-700/50 flex items-center gap-3">
                 <div class="bg-emerald-500/20 p-2 rounded-xl">
                     <i data-lucide="sparkles" class="w-4 h-4 text-emerald-300"></i>
                 </div>
                 <p id="daily-quote" class="text-[11px] italic font-medium opacity-90 leading-tight">
-                    "Sebaik-baik kalian adalah yang mempelajari Al-Qur'an dan mengajarkannya."
+                    "Memuat kutipan hari ini..."
                 </p>
             </div>
         </div>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
-        
-        <!-- Stats Comparison Card -->
+        <!-- Status Koneksi -->
+        <div id="sync-status" class="hidden flex items-center justify-center gap-2 text-[10px] font-bold text-emerald-600 bg-emerald-50 py-1 rounded-full border border-emerald-100 uppercase tracking-widest">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span> Real-time Connected
+        </div>
+
+        <!-- Kartu Perbandingan Stats -->
         <section class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100 relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-4 opacity-5">
-                <i data-lucide="book-open" class="w-24 h-24"></i>
-            </div>
-            
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-[11px] font-black uppercase text-slate-400 tracking-widest flex items-center gap-2">
                     <i data-lucide="activity" class="w-4 h-4 text-emerald-500"></i> Battle Progress
                 </h3>
-                <span id="day-badge" class="bg-emerald-50 text-emerald-700 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-100 uppercase animate-pulse-soft">
+                <span id="day-badge" class="bg-emerald-50 text-emerald-700 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-100 uppercase">
                     Ramadhan Day 1
                 </span>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                <!-- Rika Column -->
                 <div class="space-y-3 bg-emerald-50/30 p-4 rounded-3xl border border-emerald-100">
                     <div class="flex justify-between items-center">
                         <span class="text-[10px] font-black text-emerald-800 opacity-60">RIKA</span>
@@ -81,7 +74,6 @@
                     </div>
                 </div>
 
-                <!-- Azka Column -->
                 <div class="space-y-3 bg-blue-50/30 p-4 rounded-3xl border border-blue-100">
                     <div class="flex justify-between items-center">
                         <span class="text-[10px] font-black text-blue-800 opacity-60">AZKA</span>
@@ -98,72 +90,39 @@
             </div>
         </section>
 
-        <!-- Dynamic Message -->
+        <!-- Pesan Status -->
         <div id="status-alert" class="bg-slate-900 text-white p-5 rounded-[2rem] flex items-center gap-4 border-b-4 border-emerald-500 shadow-xl">
             <div class="bg-emerald-500/20 p-3 rounded-2xl">
                 <i data-lucide="message-circle" class="w-6 h-6 text-emerald-400"></i>
             </div>
             <div>
-                <h4 id="status-title" class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-0.5">Status Persaingan</h4>
+                <h4 id="status-title" class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-0.5">Sinkronisasi...</h4>
                 <p id="status-desc" class="text-xs font-semibold opacity-90 leading-relaxed">
-                    Ayo Rika! Jangan mau kalah sama Azka, cicil terus ya!
+                    Menghubungkan ke Cloud Database Rika & Azka...
                 </p>
             </div>
         </div>
 
-        <!-- Checklist -->
+        <!-- Daftar Juz -->
         <div class="space-y-4">
-            <div class="flex justify-between items-center px-2">
-                <h2 class="font-black text-slate-800 flex items-center gap-2 text-lg uppercase tracking-tight">
-                    <i data-lucide="list-checks" class="w-5 h-5 text-emerald-600"></i> Juz Tracker
-                </h2>
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[10px] font-bold text-emerald-600 uppercase">Back to Top</button>
-            </div>
-            
             <div id="juz-container" class="grid gap-3">
-                <!-- Juz items injected by JS -->
+                <!-- Juz items injected here -->
             </div>
         </div>
     </main>
 
-    <!-- Bottom Message Bar -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 glass border-t border-slate-200 z-50">
-        <div class="max-w-md mx-auto flex items-center gap-3">
-            <div class="flex-1 text-xs font-bold text-slate-500">
-                Data tersinkron otomatis secara lokal.
-            </div>
-            <div class="flex gap-2">
-                <button onclick="alert('Fitur Chat Cloud menyusul ya!')" class="bg-slate-100 text-slate-600 p-2.5 rounded-xl">
-                    <i data-lucide="message-square" class="w-5 h-5"></i>
-                </button>
-                <button onclick="shareProgress()" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg shadow-emerald-200">
-                    <i data-lucide="share-2" class="w-4 h-4"></i> Share
-                </button>
-            </div>
-        </div>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, doc, onSnapshot, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore-compat.js"></script>
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'khatam-rika-azka';
 
-    <script>
-        // Data & Dates
-        const RAMADHAN_START = new Date('2026-03-19T00:00:00');
-        const EID_TARGET = new Date('2026-03-20T00:00:00');
-        
-        const QUOTES = [
-            "Bacalah Al-Qur'an, karena ia akan datang pada hari kiamat sebagai syafaat.",
-            "Setiap satu huruf Al-Qur'an adalah sepuluh kebaikan.",
-            "Al-Qur'an adalah cahaya di bumi dan simpanan di langit.",
-            "Ramadhan adalah bulan diturunkannya Al-Qur'an.",
-            "Semangat Khatam! Rika & Azka pasti bisa!"
-        ];
-
-        let state = {
-            rika: JSON.parse(localStorage.getItem('khatam_rika')) || {},
-            azka: JSON.parse(localStorage.getItem('khatam_azka')) || {}
-        };
-
+        let localState = { rika: {}, azka: {} };
         const SURAH_MAP = [
             "Al-Fatihah - Al-Baqarah 141", "Al-Baqarah 142 - 252", "Al-Baqarah 253 - Ali 'Imran 92",
             "Ali 'Imran 93 - An-Nisa 23", "An-Nisa 24 - 147", "An-Nisa 148 - Al-Ma'idah 81",
@@ -177,15 +136,66 @@
             "Al-Mujadila 1 - At-Tahrim 12", "Al-Mulk 1 - Al-Mursalat 50", "An-Naba 1 - An-Nas 6"
         ];
 
+        async function init() {
+            try {
+                // RULE 3: Auth Dulu Baru Query
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        // FIX: Memastikan 6 segmen path sesuai RULE 1
+                        // artifacts (1) / {appId} (2) / public (3) / data (4) / khatam (5) / progress (6)
+                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'khatam', 'progress');
+                        
+                        onSnapshot(docRef, (docSnap) => {
+                            if (docSnap.exists()) {
+                                localState = docSnap.data();
+                                render();
+                            } else {
+                                setDoc(docRef, { rika: {}, azka: {} });
+                            }
+                            document.getElementById('sync-status').classList.remove('hidden');
+                        }, (error) => {
+                            console.error("Firestore Error:", error);
+                        });
+                    }
+                });
+            } catch (err) {
+                console.error("Auth Error:", err);
+            }
+        }
+
+        window.toggleJuz = async function(juzId, person) {
+            if (!auth.currentUser) return;
+            
+            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'khatam', 'progress');
+            const newState = { ...localState };
+            newState[person] = newState[person] || {};
+            newState[person][juzId] = !newState[person][juzId];
+            
+            try {
+                await updateDoc(docRef, {
+                    [person]: newState[person]
+                });
+            } catch (e) {
+                await setDoc(docRef, newState);
+            }
+        };
+
         function updateCountdown() {
+            const EID_TARGET = new Date('2026-03-20T00:00:00');
+            const RAMADHAN_START = new Date('2026-03-19T00:00:00');
             const now = new Date();
             const distance = EID_TARGET.getTime() - now.getTime();
-            const countdownEl = document.getElementById('countdown');
             
             if (distance > 0) {
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                countdownEl.innerHTML = `
+                document.getElementById('countdown').innerHTML = `
                     <div class="bg-white/10 px-3 py-1.5 rounded-2xl text-center border border-white/20"><span class="text-base block leading-none">${days}</span><span class="text-[7px] opacity-60 uppercase">Hari</span></div>
                     <div class="bg-white/10 px-3 py-1.5 rounded-2xl text-center border border-white/20"><span class="text-base block leading-none">${hours}</span><span class="text-[7px] opacity-60 uppercase">Jam</span></div>
                 `;
@@ -193,56 +203,18 @@
 
             const diffTime = now.getTime() - RAMADHAN_START.getTime();
             let currentDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            currentDay = currentDay < 1 ? 1 : currentDay > 30 ? 30 : currentDay;
-            
+            currentDay = Math.max(1, Math.min(30, currentDay));
             document.getElementById('day-badge').innerText = `Ramadhan Day ${currentDay}`;
-            document.getElementById('daily-quote').innerText = QUOTES[currentDay % QUOTES.length];
+            
+            const quotes = [
+                "Bacalah Al-Qur'an, ia akan memberi syafaat di kiamat.",
+                "Satu huruf Al-Qur'an adalah sepuluh kebaikan.",
+                "Sebaik-baik kalian adalah yang belajar Al-Qur'an.",
+                "Ramadhan adalah bulan penuh keberkahan Al-Qur'an."
+            ];
+            document.getElementById('daily-quote').innerText = quotes[currentDay % quotes.length];
+            
             return currentDay;
-        }
-
-        function toggleJuz(juzId, person) {
-            state[person][juzId] = !state[person][juzId];
-            localStorage.setItem(`khatam_${person}`, JSON.stringify(state[person]));
-            
-            // Play simple feedback
-            if (state[person][juzId]) {
-                confettiEffect();
-            }
-            
-            render();
-        }
-
-        function confettiEffect() {
-            // Placeholder for simple animation
-            console.log("Juz Selesai! Alhamdulillah.");
-        }
-
-        function shareProgress() {
-            const text = `Progress Khatam Ramadhan\nRika: ${document.getElementById('rika-count').innerText}/30\nAzka: ${document.getElementById('azka-count').innerText}/30\nSemangat Tadarus! 🌙`;
-            if (navigator.share) {
-                navigator.share({ title: 'Khatam Hub', text: text });
-            } else {
-                alert("Copied to clipboard!\n\n" + text);
-            }
-        }
-
-        function updateStatus(rika, azka) {
-            const title = document.getElementById('status-title');
-            const desc = document.getElementById('status-desc');
-            
-            if (rika > azka) {
-                title.innerText = "RIKA MEMIMPIN!";
-                desc.innerText = "Azka, ayo kejar Rika! Jangan sampai ketinggalan jauh ya!";
-            } else if (azka > rika) {
-                title.innerText = "AZKA UNGGUL!";
-                desc.innerText = "Rika semangat! Dikit lagi bisa nyalip Azka kok.";
-            } else if (rika === 0 && azka === 0) {
-                title.innerText = "SAMA-SAMA MULAI";
-                desc.innerText = "Ayo mulai tadarus hari ini biar berkah Ramadhannya pol!";
-            } else {
-                title.innerText = "SKOR IMBANG!";
-                desc.innerText = "Wah kalian kompak banget! Terus istiqomah bareng ya.";
-            }
         }
 
         function render() {
@@ -254,41 +226,36 @@
             let azkaTotal = 0;
 
             for (let i = 1; i <= 30; i++) {
-                const doneRika = state.rika[i];
-                const doneAzka = state.azka[i];
+                const doneRika = localState.rika && localState.rika[i];
+                const doneAzka = localState.azka && localState.azka[i];
                 if (doneRika) rikaTotal++;
                 if (doneAzka) azkaTotal++;
 
                 const isTarget = i === currentDay;
                 const item = document.createElement('div');
-                item.className = `bg-white p-5 rounded-[2rem] border-2 transition-all duration-300 flex items-center justify-between shadow-sm hover:shadow-md ${doneRika && doneAzka ? 'border-emerald-500 bg-emerald-50/20' : isTarget ? 'border-yellow-400 bg-yellow-50/30' : 'border-slate-50'}`;
+                item.className = `bg-white p-5 rounded-[2rem] border-2 transition-all duration-300 flex items-center justify-between shadow-sm ${doneRika && doneAzka ? 'border-emerald-500 bg-emerald-50/20' : isTarget ? 'border-yellow-400 bg-yellow-50/30' : 'border-slate-50'}`;
                 
                 item.innerHTML = `
                     <div class="flex items-center gap-5">
                         <div class="relative">
-                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg ${doneRika && doneAzka ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-100' : isTarget ? 'bg-yellow-400 text-yellow-900 shadow-lg shadow-yellow-100' : 'bg-slate-100 text-slate-400'}">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg ${doneRika && doneAzka ? 'bg-emerald-600 text-white' : isTarget ? 'bg-yellow-400 text-yellow-900' : 'bg-slate-100 text-slate-400'}">
                                 ${i}
                             </div>
-                            ${isTarget ? '<span class="absolute -top-2 -left-2 bg-red-500 text-white text-[7px] font-black px-1.5 py-0.5 rounded-full animate-bounce">NOW</span>' : ''}
                         </div>
                         <div>
-                            <div class="text-xs font-black text-slate-800 flex items-center gap-1.5 uppercase tracking-tight">
-                                JUZ ${i}
-                            </div>
-                            <div class="text-[10px] text-slate-400 font-bold uppercase truncate max-w-[140px]">
-                                ${SURAH_MAP[i-1]}
-                            </div>
+                            <div class="text-xs font-black text-slate-800 uppercase tracking-tight">JUZ ${i}</div>
+                            <div class="text-[10px] text-slate-400 font-bold truncate max-w-[130px]">${SURAH_MAP[i-1]}</div>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <button onclick="toggleJuz(${i}, 'rika')" class="flex flex-col items-center gap-1.5 group">
-                            <div class="p-2.5 rounded-2xl transition-all group-active:scale-90 ${doneRika ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-50 text-slate-200'}">
+                        <button onclick="toggleJuz(${i}, 'rika')" class="flex flex-col items-center gap-1 group">
+                            <div class="p-2.5 rounded-2xl ${doneRika ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-50 text-slate-200'}">
                                 <i data-lucide="${doneRika ? 'check-circle' : 'circle'}" class="w-5 h-5"></i>
                             </div>
                             <span class="text-[8px] font-black text-slate-400 uppercase">Rika</span>
                         </button>
-                        <button onclick="toggleJuz(${i}, 'azka')" class="flex flex-col items-center gap-1.5 group">
-                            <div class="p-2.5 rounded-2xl transition-all group-active:scale-90 ${doneAzka ? 'bg-blue-100 text-blue-600' : 'bg-slate-50 text-slate-200'}">
+                        <button onclick="toggleJuz(${i}, 'azka')" class="flex flex-col items-center gap-1 group">
+                            <div class="p-2.5 rounded-2xl ${doneAzka ? 'bg-blue-100 text-blue-600' : 'bg-slate-50 text-slate-200'}">
                                 <i data-lucide="${doneAzka ? 'check-circle' : 'circle'}" class="w-5 h-5"></i>
                             </div>
                             <span class="text-[8px] font-black text-slate-400 uppercase">Azka</span>
@@ -298,17 +265,34 @@
                 container.appendChild(item);
             }
 
-            // Update UI
             document.getElementById('rika-count').innerText = rikaTotal;
             document.getElementById('azka-count').innerText = azkaTotal;
             document.getElementById('rika-bar').style.width = `${(rikaTotal/30)*100}%`;
             document.getElementById('azka-bar').style.width = `${(azkaTotal/30)*100}%`;
             
-            updateStatus(rikaTotal, azkaTotal);
+            updateStatusText(rikaTotal, azkaTotal);
             lucide.createIcons();
         }
 
-        window.onload = render;
+        function updateStatusText(rika, azka) {
+            const title = document.getElementById('status-title');
+            const desc = document.getElementById('status-desc');
+            if (rika > azka) {
+                title.innerText = "RIKA MEMIMPIN!";
+                desc.innerText = "Azka, jangan mau kalah! Ayo tadarus lagi!";
+            } else if (azka > rika) {
+                title.innerText = "AZKA LAGI NGEBUT!";
+                desc.innerText = "Rika semangat! Dikit lagi bisa disalip kok.";
+            } else if (rika === 0 && azka === 0) {
+                title.innerText = "SIAP MULAI?";
+                desc.innerText = "Ayo isi progres khatam kalian di sini!";
+            } else {
+                title.innerText = "KOMPAK BANGET!";
+                desc.innerText = "Kalian berdua luar biasa, progresnya sama persis!";
+            }
+        }
+
+        init();
         setInterval(updateCountdown, 60000);
     </script>
 </body>
